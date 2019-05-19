@@ -1,0 +1,24 @@
+@font-face {
+    font-family:'Galindo';
+    src: url('Galindo-Regular.eot');
+    src: url('Galindo-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Galindo-Regular.woff2') format('woff2'),
+        url('Galindo-Regular.woff') format('woff'),
+        url('Galindo-Regular.ttf') format('truetype'),
+        url('Galindo-Regular.svg#Galindo-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Leftovers';
+    src: url('Leftovers.eot');
+    src: url('Leftovers.eot?#iefix') format('embedded-opentype'),
+        url('Leftovers.woff2') format('woff2'),
+        url('Leftovers.woff') format('woff'),
+        url('Leftovers.ttf') format('truetype'),
+        url('Leftovers.svg#Leftovers') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+

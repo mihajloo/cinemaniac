@@ -1,0 +1,152 @@
+/*
+  https://developer.mozilla.org/en/docs/Web/CSS/box-shadow
+  box-shadow: [inset?] [top] [left] [blur] [size] [color];
+
+  Tips:
+    - We're setting all the blurs to 0 since we want a solid fill.
+    - Add the inset keyword so the box-shadow is on the inside of the element
+    - Animating the inset shadow on hover looks like the element is filling in from whatever side you specify ([top] and [left] accept negative values to become [bottom] and [right])
+    - Multiple shadows can be stacked
+    - If you're animating multiple shadows, be sure to keep the same number of shadows so the animation is smooth. Otherwise, you'll get something choppy.
+*/
+.fill:hover,
+.fill:focus {
+  box-shadow: inset 0 0 0 2em var(--hover);
+}
+
+button:disabled {
+	font-size:20px;
+  --color: #ccc;
+  --hover: #ccc;
+}
+
+button:disabled:hover
+button:disabled:focus {
+    box-shadow: inset 0 0 0 2em var(--hover);
+}
+.fill {
+	font-size:20px;
+  --color: #FFDF00;
+  --hover: #FFDF00;
+	width:90%;
+}
+.signout:hover,
+.signout:focus {
+  box-shadow: inset 0 0 0 2em var(--hover);
+}
+
+.submit {
+	font-size:20px;
+  --color: #FFDF00;
+  --hover: #FFDF00;
+	
+}
+.submit:hover,
+.submit:focus {
+  box-shadow: inset 0 0 0 2em var(--hover);
+}
+.signout {
+	font-size:20px;
+  --color: #FFDF00;
+  --hover: #FFDF00;
+
+}
+
+.losefill{
+font-size:20px;	
+--color:#ff0000;
+--hover:#ff0000;
+width:90%;
+}
+
+.losefill:hover,
+.losefill:focus {
+  box-shadow: inset 0 0 0 2em var(--hover);
+}
+button {
+  color: var(--color);
+  transition: 0.25s;
+}
+button:hover, button:focus {
+  border-color: var(--hover);
+  color: #000;
+}
+
+body {
+  color: #fff;
+  background: #070707;
+  font: 300 1em 'Galindo';
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+
+}
+
+button {
+  background: none;
+  border: 2px solid;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+  cursor:pointer;
+ 
+}
+
+h1 {
+  font-weight: 400;
+}
+input[type=text], select {
+	font-family:'Galindo';
+	font-size: 20px;
+  width: 90%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: center;
+    color:#000;
+  
+ 
+}
+input[type=password], select {
+	font-family:'Galindo';
+	font-size: 20px;
+  width: 90%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: center;
+    color:#000;
+  
+ 
+}
+input[type=submit] {
+  
+  background-color: #FFDF00;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+
+
+
+
+
