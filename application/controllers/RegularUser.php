@@ -22,18 +22,18 @@ class RegularUser extends CI_Controller {
         
         $korisnik = $this->session->userdata('korisnik');
         if($korisnik == null) {
-            redirect('Gost');
+            redirect('Guest');
         }
         
-        if($this->Moderator->proveriModeratora($korisnik->Username)) {
+        if($this->Moderator->proveriModeratora($korisnik->regUser->Username)) {
             redirect('ModeratorC');
         }
         
-        if($this->Admin->proveriAdmina($korisnik->Username)) {
+        if($this->Admin->proveriAdmina($korisnik->regUser->Username)) {
             redirect('AdminC');
         }
         
-        if($this->Vip->proveriVipa($korisnik->Username)) {
+        if($this->Vip->proveriVipa($korisnik->regUser->Username)) {
             redirect('VipC');
         }
     }
@@ -43,8 +43,37 @@ class RegularUser extends CI_Controller {
     }
     
     public function index() {
-        $this->prikazi('HomePageRegularUser.php');
+        $this->prikazi('HomePageRegularUser.php',['str' =>1]);
+    }
+    public function signout(){
+        $this->session->unset_userdata('korisnik');
+        redirect("Guest");
+    }
+    public function statistics(){
+        $korisnik = $this->session->userdata('korisnik');
+        $brPartija = $korisnik->igrac->BrojPartija;
+        $brPobeda = $korisnik->igrac->BrojPobeda;
+        $brPoraza = $korisnik->igrac->BrojPoraza;
+        if($brPartija > 0){
+            $procenat = $brPobeda/$brPartija;
+        }
+        else $procenat = 0;
+        $poruka['procenat'] = $procenat*100;
+        $poruka['brPobeda'] = $brPobeda;
+        $poruka['brPoraza'] = $brPoraza;
+        $poruka['str'] = 2;
+        $sum = 0;
+        $dohvatiPartije = $this->Igrac->dohvatiPartije($korisnik->regUser->Username);
+        foreach($dohvatiPartije as $partija){
+           $sum += $partija->BrojPoena;
+        }
+        if($brPartija > 0)
+        $poruka['avg'] = $sum/$brPartija;
+        else $poruka['avg'] = 0;
+        $this->prikazi('HomePageRegularUser.php',$poruka);
     }
     
-    
+    public function matchHistory(){
+        
+    }
 }

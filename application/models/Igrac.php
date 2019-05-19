@@ -33,4 +33,11 @@ class Igrac extends CI_Model {
     public function ubaciUBazu($username) {
          $this->db->insert('igrac', ['Username' =>$username,'BrojPartija'=>0,'BrojPobeda'=>0,'BrojPoraza'=>0]);
     }
+    
+    public function dohvatiPartije($username){
+        $this->db->select('IdPartija,BrojPoena');
+        $this->db->from('igrao');
+        $this->db->where('Username',$username);
+        return $this->db->get()->result();
+    }
 }

@@ -18,7 +18,7 @@
 <p class="quote" ><i>Welcome!</i></p>
 </div>
 <div class="col-4">
-<button class="signout" class="col-4" onclick="window.location.href = '<?php echo site_url('RegularUser/logout') ?>';" style="width:250px;">Sign Out</button>
+<button class="signout" class="col-4" onclick="window.location.href = '<?php echo site_url('RegularUser/signout') ?>';" style="width:250px;">Sign Out</button>
 </div>
 </div>
 <div class="row" style="margin-top:75px;">
@@ -27,7 +27,7 @@
 <button class=" fill" onclick="window.location.href = 'game.html';">Play</button>
 
 
-<button class=" fill"onclick="myFunction1()">Statistics</button>
+<button class=" fill"onclick="window.location.href = '<?php echo site_url('RegularUser/statistics') ?>';">Statistics</button>
 
 
 <button class=" fill" onclick="myFunction2()">Match History</button>
@@ -39,10 +39,10 @@
 
 
 <div  class="col-8" >
-<div id="demo1" class="centar"  valign="top" style="display:none" >
-<p><font color=#FFDF00 size=20px>Wins: 10 <br> <br> Losses: 0 <br><br>  Win Ratio: 100% <br><br> Average: 10p per Game</font></p>
+    <div id="demo1" class="centar"  valign="top" <?php if($str == 2) echo "style='display:block'"; else echo "style='display:none'";?>>
+<p><font color=#FFDF00 size=20px>Wins: <?php echo $brPobeda ?> <br> <br> Losses: <?php echo $brPoraza ?> <br><br>  Win Ratio: <?php echo $procenat ?>% <br><br> Average: <?php echo $avg ?>p per Game</font></p>
 </div>
-<div id="demo2" class="centar" style="display:none">
+<div id="demo2" class="centar"  <?php if($str == 3) echo "style='display:block'"; else echo "style='display:none'";?>>
 <div  class="vertical-menu">
   <div class="row">
   <div class= "col-4"><p class="lose">LOSS</p> </div>  
@@ -75,7 +75,7 @@
 
 </div>
 
-<div id="demo3" class="centar" style="display:none" >
+<div id="demo3" class="centar" <?php if($str == 4) echo "style='display:block'"; else echo "style='display:none'";?>>
 <div class="leader"  >
     <div class="red">
         <div class="spot">1.</div><div class="name">DrKingSchultz</div><div class="score">999</div>
@@ -114,7 +114,7 @@
 </div>	
 
 </div>
-<div id="demo0"  style="display:block">
+<div id="demo0"  <?php if($str == 1) echo "style='display:block'"; else echo "style='display:none'";?>>
 		<img src="<?php echo base_url(); ?>media/images/logo2.png" style="max-width:100%;">
 		</div>
 </div>
