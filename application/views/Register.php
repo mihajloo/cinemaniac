@@ -16,7 +16,7 @@
      <div class='row'>
       <div class='col'>   
 <div align="right">
-<button   onclick="window.location.href = '<?php echo site_url('Guest/loginPage') ?>';" ><i class="fas fa-arrow-left"></i></button>
+<button  class='signout' onclick="window.location.href = '<?php echo site_url('Guest/loginPage') ?>';" ><i class="fas fa-arrow-left"></i></button>
 </div>
  </div> 
     </div>    

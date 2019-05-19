@@ -127,9 +127,9 @@
 <script>
 function myFunction1() {
   document.getElementById('demo1').style.display = "block";	
-    document.getElementById('demo2').style.display = "none";
-	document.getElementById('demo3').style.display = "none";
-	document.getElementById('demo0').style.display = "none";
+  document.getElementById('demo2').style.display = "none";
+  document.getElementById('demo3').style.display = "none";
+  document.getElementById('demo0').style.display = "none";
 	  
 }
 
