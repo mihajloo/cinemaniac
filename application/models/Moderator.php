@@ -20,7 +20,7 @@ class Moderator extends CI_Model {
         return $this->db->where('Username', $username)->get('moderator')->row();
     }
     
-    public function proveriModeratora($id) {
+    public function proveriModeratora($username) {
         $mod = $this->db->where('Username', $username)->get('moderator')->row();
         if($mod != null) {
             return true;

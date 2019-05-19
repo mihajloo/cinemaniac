@@ -73,7 +73,7 @@ class Guest extends CI_Controller{
                     }
                     
                     if($this->Igrac->proveriIgraca($username)) {
-                        redirect('IgracC');
+                        redirect('RegularUser');
                     }
                     else {
                         redirect('VipC');
@@ -118,6 +118,7 @@ class Guest extends CI_Controller{
             $korisnik = $this->Korisnik->dohvatiKorisnika($username);
             if($korisnik == null) {
                 $this->Korisnik->ubaciUBazu($username, $password, $email);
+                $this->Igrac->ubaciUBazu($username);
                 $this->prikazi('index.php');
                 }
             else {

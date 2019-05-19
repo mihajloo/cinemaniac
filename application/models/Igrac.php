@@ -29,4 +29,8 @@ class Igrac extends CI_Model {
             return false;
         }
     }
+    
+    public function ubaciUBazu($username) {
+         $this->db->insert('igrac', ['Username' =>$username,'BrojPartija'=>0,'BrojPobeda'=>0,'BrojPoraza'=>0]);
+    }
 }

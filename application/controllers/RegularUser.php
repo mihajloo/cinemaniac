@@ -14,6 +14,36 @@
 class RegularUser extends CI_Controller {
      public function __construct() {       
         parent::__construct();
+    $this->load->model('Korisnik');
+        $this->load->model('Admin');
+        $this->load->model('Moderator');
+        $this->load->model('Igrac');
+        $this->load->model('Vip');
+        
+        $korisnik = $this->session->userdata('korisnik');
+        if($korisnik == null) {
+            redirect('Gost');
+        }
+        
+        if($this->Moderator->proveriModeratora($korisnik->Username)) {
+            redirect('ModeratorC');
+        }
+        
+        if($this->Admin->proveriAdmina($korisnik->Username)) {
+            redirect('AdminC');
+        }
+        
+        if($this->Vip->proveriVipa($korisnik->Username)) {
+            redirect('VipC');
+        }
+    }
+    
+    private function prikazi($page, $content = []) {
+        $this->load->view($page, $content);
+    }
+    
+    public function index() {
+        $this->prikazi('HomePageRegularUser.php');
     }
     
     
