@@ -30,10 +30,10 @@
 <button class=" fill"onclick="window.location.href = '<?php echo site_url('RegularUser/statistics') ?>';">Statistics</button>
 
 
-<button class=" fill" onclick="myFunction2()">Match History</button>
+<button class=" fill" onclick="window.location.href = '<?php echo site_url('RegularUser/matchHistory') ?>';">Match History</button>
 
 
-<button class=" fill" onclick ="myFunction3()">Leaderboard</button>
+<button class=" fill"onclick="window.location.href = '<?php echo site_url('RegularUser/leaderboard') ?>';">Leaderboard</button>
 
 </div>
 
@@ -44,75 +44,41 @@
 </div>
 <div id="demo2" class="centar"  <?php if($str == 3) echo "style='display:block'"; else echo "style='display:none'";?>>
 <div  class="vertical-menu">
-  <div class="row">
-  <div class= "col-4"><p class="lose">LOSS</p> </div>  
-  <div class= "col-8"><p class="lose">Points: 10p</p>
-  </div>
-  </div>
-  
-  <div class="row">
-  <div class= "col-4"><p class="lose">LOSS</p> </div>  
-  <div class= "col-8"><p class="lose">Points: 10p</p>
-  </div>
-  </div>
-  <div class="row">
-  <div class= "col-4"><p class="win">WIN</p> </div>  
-  <div class= "col-8"><p class="win">Points: 10p</p>
-  </div>
-  </div>
-  <div class="row">
-  <div class= "col-4"><p class="win">WIN</p> </div>  
-  <div class= "col-8"><p class="win">Points: 44p</p>
-  </div>
-  </div>
-  <div class="row">
-  <div class= "col-4"><p class="lose">LOSS</p> </div>  
-  <div class= "col-8"><p class="lose">Points: 10p</p>
-  </div>
-  </div>
-  
+    <?php 
+    foreach($partije as $partija){
+        $str="";
+        $str.= "<div class='row'>";
+        $str.= "<div class='col-4'>";
+      
+        $str.= "<p class=".$partija->pobedio.">";
+        if($partija->pobedio =="win"){
+             $str.= "WIN";
+        }
+        else  $str.= "LOSS";
+        $str.= "</p></div>";
+        $str.=  "<div class= 'col-8'>";
+        $str.= "<p class=".$partija->pobedio.">";
+        $str.="Points: ".$partija->partija->BrojPoena."p</p></div></div>";
+        echo $str;
+    }
+    ?>
 </div>
-
 </div>
 
 <div id="demo3" class="centar" <?php if($str == 4) echo "style='display:block'"; else echo "style='display:none'";?>>
-<div class="leader"  >
-    <div class="red">
-        <div class="spot">1.</div><div class="name">DrKingSchultz</div><div class="score">999</div>
-    </div>
+<div class="leader">
+    <?php 
+      $i =1;
+     foreach ($igraci as $igrac){
+         $str="";
+         $str.="<div class='red'><div class='spot'>";
+         $str.=$i."</div><div class='name'>";
+         $str.=$igrac->Username."</div><div class='score'>".$igrac->Poeni."</div></div></div>";
+         echo $str;
+     }
+    ?>
    
-    <div class="red">
-        <div class="spot">2.</div><div class="name">Anton Chigurh</div><div class="score">900</div>
-    </div>
-    
-    <div class="red">
-        <div class="spot">3.</div><div class="name">Daniel Plainview</div><div class="score">840</div>
-    </div>
-    
-	<div class="red">
-        <div class="spot">4.</div><div class="name">Hannibal Lecter</div><div class="score">790</div>
-    </div>
-	
-	<div class="red">
-        <div class="spot">5.</div><div class="name">Col. Hans Landa</div><div class="score">720</div>
-    </div>
-    
-    <div class="red">
-        <div class="spot">6.</div><div class="name">Derek Vinyard</div><div class="score">715</div>
-    </div>
-	
-	<div class="red">
-        <div class="spot">7.</div><div class="name">Big Lebowski</div><div class="score">680</div>
-    </div>
-	
-	<div class="red">
-        <div class="spot">8.</div><div class="name">Leon</div><div class="score">650</div>
-    </div>
-	<div class="red">
-        <div class="spot">9.</div><div class="name">M. Jones</div><div class="score">620</div>
-    </div>
 </div>	
-
 </div>
 <div id="demo0"  <?php if($str == 1) echo "style='display:block'"; else echo "style='display:none'";?>>
 		<img src="<?php echo base_url(); ?>media/images/logo2.png" style="max-width:100%;">

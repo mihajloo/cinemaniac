@@ -19,7 +19,7 @@ class RegularUser extends CI_Controller {
         $this->load->model('Moderator');
         $this->load->model('Igrac');
         $this->load->model('Vip');
-        
+         $this->load->model('Partija');
         $korisnik = $this->session->userdata('korisnik');
         if($korisnik == null) {
             redirect('Guest');
@@ -63,7 +63,7 @@ class RegularUser extends CI_Controller {
         $poruka['brPoraza'] = $brPoraza;
         $poruka['str'] = 2;
         $sum = 0;
-        $dohvatiPartije = $this->Igrac->dohvatiPartije($korisnik->regUser->Username);
+        $dohvatiPartije = $this->Partija->dohvatiPartije($korisnik->regUser->Username);
         foreach($dohvatiPartije as $partija){
            $sum += $partija->BrojPoena;
         }
@@ -74,6 +74,27 @@ class RegularUser extends CI_Controller {
     }
     
     public function matchHistory(){
-        
+      $korisnik = $this->session->userdata('korisnik');
+      $dohvatiPartije  = $this->Partija->dohvatiPartijeNajskorije($korisnik->regUser->Username);
+     $arr = array();
+       foreach($dohvatiPartije as $partija){
+           $clan = new stdClass();
+           $clan->partija = $partija;
+            if($this->Igrac->pobedioPartiju($korisnik->regUser->Username,$partija->IdPartija)){
+                $clan->pobedio = "win";
+            }
+            else $clan->pobedio = "lose";
+            array_push($arr,$clan);
+           
+        }
+      $poruka['partije'] = $arr;
+      $poruka['str'] = 3;
+      $this->prikazi('HomePageRegularUser.php',$poruka);
     }
+    public function leaderboard(){
+        $poruka['igraci'] = $this->Igrac->dohvatiTop10Igraca();
+        $poruka['str'] = 4;
+        $this->prikazi('HomePageRegularUser.php',$poruka);
+    }
+    
 }

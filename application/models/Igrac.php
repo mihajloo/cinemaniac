@@ -34,10 +34,37 @@ class Igrac extends CI_Model {
          $this->db->insert('igrac', ['Username' =>$username,'BrojPartija'=>0,'BrojPobeda'=>0,'BrojPoraza'=>0]);
     }
     
-    public function dohvatiPartije($username){
-        $this->db->select('IdPartija,BrojPoena');
-        $this->db->from('igrao');
-        $this->db->where('Username',$username);
-        return $this->db->get()->result();
+    public function pobedioPartiju($username,$idP){
+        //slucaj kada je draw nije uzet u obzir
+        $this->db->select('*');
+        $this->db->from('Gost');
+        $this->db->where('IdPartija',$idP);
+        $this->db->order_by('BrojPoena','desc');
+        $maxGost = $this->db->get()->row();
+        $this->db->select('i.Username AS Username,i.BrojPoena AS BrojPoena');
+        $this->db->from('igrao i,partija p');
+        $this->db->where('i.IdPartija',$idP);
+        $maxIgrac = $this->db->get()->row();
+        if($maxIgrac == NULL){
+            return false;
+        }
+        else{
+            if($maxGost == NULL){
+                return $maxIgrac->Username == $username;
+            }
+            if($maxGost->BrojPoena > $maxIgrac->BrojPoena){
+                return false;
+            }
+            return $maxIgrac->Username == $username;
+        }
+    }
+    
+    public function dohvatiTop10Igraca(){
+        $this->db->select("i.Username AS Username,SUM(ig.BrojPoena) AS Poeni");
+        $this->db->from("igrac i,igrao ig");
+        $this->db->where("i.Username=ig.Username");
+        $this->db->group_by('i.Username');
+        
+        return $this->db->order_by("SUM(ig.BrojPoena)")->limit(10)->get()->result();
     }
 }
