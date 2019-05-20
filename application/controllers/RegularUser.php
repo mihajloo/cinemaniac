@@ -97,4 +97,10 @@ class RegularUser extends CI_Controller {
         $this->prikazi('HomePageRegularUser.php',$poruka);
     }
     
+    public function play(){
+        $this->prikazi('Question.php');
+    }
+    public function klik($i){
+        echo "Kliknuto dugme ".$i."!!!";
+    }
 }
