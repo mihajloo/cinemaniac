@@ -136,4 +136,8 @@ class VipC extends CI_Controller {
     public function back(){
         $this->showInserts();
     }
+    
+    public function play(){
+        $this->prikazi('Waiting.php');
+    }
 }

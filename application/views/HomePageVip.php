@@ -29,7 +29,7 @@
             <div class="row" style="margin-top:75px;">
                 <div  class="col-4 ">
 
-                    <button class=" fill" onclick="window.location.href = 'game.html';">Play</button>
+                    <button class=" fill" onclick="window.location.href = '<?php echo site_url('VipC/play') ?>';">Play</button>
 
 
                     <button class=" fill"onclick="window.location.href = '<?php echo site_url('VipC/statistics') ?>';">Statistics</button>
