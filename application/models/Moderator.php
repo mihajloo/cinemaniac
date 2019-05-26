@@ -29,4 +29,20 @@ class Moderator extends CI_Model {
             return false;
         }
     }
+     
+    
+      
+    public function insertMod($username){
+         $this->db->insert('moderator', ['Username' =>$username]);
+    
+    }
+     public function deleteMod($username){
+        $this->db->where('Username', $username);
+        $this->db->delete('moderator');
+        
+    
+    }
+
+    
+    
 }

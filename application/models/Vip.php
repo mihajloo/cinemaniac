@@ -29,4 +29,12 @@ class Vip extends CI_Model {
             return false;
         }
     }
+    public function deleteVip($username){
+        $this->db->where('Username', $username);
+        $this->db->delete('vip');
+    }
+    public function insertVip($username){
+         $this->db->insert('vip', ['Username' =>$username]);
+    
+    }
 }

@@ -11,18 +11,19 @@
  *
  * @author Mihajlo
  */
-class RegularUser extends CI_Controller {
+class VipC extends CI_Controller {
      public function __construct() {       
         parent::__construct();
-    $this->load->model('Korisnik');
+        
+        $this->load->model('Korisnik');
         $this->load->model('Admin');
         $this->load->model('Moderator');
         $this->load->model('Igrac');
         $this->load->model('Vip');
-         $this->load->model('Partija');
+        $this->load->model('Partija');
         $korisnik = $this->session->userdata('korisnik');
         if($korisnik == null) {
-            redirect('Guest');
+            redirect('Guest/loginPage');
         }
         
         if($this->Moderator->proveriModeratora($korisnik->regUser->Username)) {
@@ -33,9 +34,7 @@ class RegularUser extends CI_Controller {
             redirect('AdminC');
         }
         
-        if($this->Vip->proveriVipa($korisnik->regUser->Username)) {
-            redirect('VipC');
-        }
+        
     }
     
     private function prikazi($page, $content = []) {
@@ -43,7 +42,7 @@ class RegularUser extends CI_Controller {
     }
     
     public function index() {
-        $this->prikazi('HomePageRegularUser.php',['str' =>1]);
+        $this->prikazi('HomePageVip.php',['str' =>1]);
     }
     public function signout(){
         $this->session->unset_userdata('korisnik');
@@ -70,7 +69,7 @@ class RegularUser extends CI_Controller {
         if($brPartija > 0)
         $poruka['avg'] = $sum/$brPartija;
         else $poruka['avg'] = 0;
-        $this->prikazi('HomePageRegularUser.php',$poruka);
+        $this->prikazi('HomePageVip.php',$poruka);
     }
     
     public function matchHistory(){
@@ -89,16 +88,52 @@ class RegularUser extends CI_Controller {
         }
       $poruka['partije'] = $arr;
       $poruka['str'] = 3;
-      $this->prikazi('HomePageRegularUser.php',$poruka);
+      $this->prikazi('HomePageVip.php',$poruka);
     }
     public function leaderboard(){
         $poruka['igraci'] = $this->Igrac->dohvatiTop10Igraca();
         $poruka['str'] = 4;
-        $this->prikazi('HomePageRegularUser.php',$poruka);
+        $this->prikazi('HomePageVip.php',$poruka);
     }
-    public function deleteRegularUser($username){
-        $this->Igrac->deleteKorisnik($username);
-        
+    public function showQuestion($idScena){
+        $poruka['str'] = 5;
+        $poruka['scena'] = $this->MovieInsert->dohvatiScenu($idScena);
+        $this->prikazi('HomePageVip.php',$poruka);
     }
     
+    public function showInserts(){
+        $poruka['str'] = 6;
+        $poruka['dohvatiScene'] = $this->MovieInsert->dohvatiScene();
+        $this->prikazi('HomePageVip.php',$poruka);
+    }
+    public function insertQuestion(){
+        $this->form_validation->set_rules('q', 'q', 'required');
+        $this->form_validation->set_rules('cor', 'cor', 'required');
+        $this->form_validation->set_rules('wra1', 'wra1', 'required');
+        $this->form_validation->set_rules('wra2', 'wra2', 'required');
+        $this->form_validation->set_rules('wra3', 'wra3', 'required');
+        $this->form_validation->set_rules('idS', 'idS', 'required');
+        if($this->form_validation->run()){
+           
+            $question = $this->input->post('q');
+            $ca = $this->input->post('cor');
+            $wa1 = $this->input->post('wra1');
+            $wa2 = $this->input->post('wra2');
+            $wa3 = $this->input->post('wra3'); 
+            $idS = $this->input->post('idS'); 
+            $odobreno = 'nije';
+            $idCA = $this->Odgovor->insertOdgovor($ca);
+            $idWA1 = $this->Odgovor->insertOdgovor($wa1);
+            $idWA2 = $this->Odgovor->insertOdgovor($wa2);
+            $idWA3 = $this->Odgovor->insertOdgovor($wa3);
+            $idQ = $this->Pitanje->insertPitanje($question,$idCA,$idS,$odobreno);
+            $this->NetacanOdgovorNa->ubaciNetacanOdgovor($idQ,$idWA1);
+            $this->NetacanOdgovorNa->ubaciNetacanOdgovor($idQ,$idWA2);
+            $this->NetacanOdgovorNa->ubaciNetacanOdgovor($idQ,$idWA3);
+            redirect('VipC');
+        }
+    }
+    public function back(){
+        $this->showInserts();
+    }
 }

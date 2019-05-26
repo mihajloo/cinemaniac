@@ -67,4 +67,8 @@ class Igrac extends CI_Model {
         
         return $this->db->order_by("SUM(ig.BrojPoena)")->limit(10)->get()->result();
     }
+     public function deleteKorisnik($username){
+         $this->db->where('Username', $username);
+        $this->db->delete('igrac');
+     }
 }

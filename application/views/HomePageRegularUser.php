@@ -82,7 +82,7 @@
 </div>
 <div id="demo0"  <?php if($str == 1) echo "style='display:block'"; else echo "style='display:none'";?>>
 		<img src="<?php echo base_url(); ?>media/images/logo2.png" style="max-width:100%;">
-		</div>
+</div>
 </div>
 
 
