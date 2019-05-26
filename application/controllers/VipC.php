@@ -136,8 +136,15 @@ class VipC extends CI_Controller {
     public function back(){
         $this->showInserts();
     }
-    
+    public function dohvatiPartiju(){
+       $brIgraca =$this->Partija->brojIgraca(1);
+       echo $brIgraca;
+    }
     public function play(){
+        //$poruka['brIgraca'] = $this->Partija->brojIgraca(1);
         $this->prikazi('Waiting.php');
+    }
+    public function game(){
+         $this->prikazi('game.php');
     }
 }

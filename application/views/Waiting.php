@@ -19,7 +19,7 @@
       <div class="spinner-border text-primary" role="status">
   <span class="sr-only">Loading...</span>
     </div>
-        <div><?php if(isset($brIgraca)) echo $brIgraca; else echo 0; ?></div>   
+        <div id='txtHint'></div>   
         <script>  
 setInterval(function f() {
 if (window.XMLHttpRequest)
@@ -34,10 +34,14 @@ xmlhttp.onreadystatechange=function()
 {
 if (xmlhttp.readyState==4 && xmlhttp.status==200)
  {
- document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+ var rez=xmlhttp.responseText;
+ document.getElementById("txtHint").innerHTML=rez;
+ if(rez == 4){
+     window.location.href="<?php $stranica = site_url('VipC/game');  echo $stranica;?>";
+ }
  }
 }
-xmlhttp.open("GET","<?php $stranica = site_url('VipC/play');  echo $stranica;?>",true);
+xmlhttp.open("GET","<?php $stranica = site_url('VipC/dohvatiPartiju');  echo $stranica;?>",true);
 xmlhttp.send();
 },1000);
     </script>

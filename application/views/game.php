@@ -11,7 +11,7 @@ body, html {
 
 .bg {
   /* The image used */
-  background-image: url("media/images/cinema.jpg");
+  background-image: url("<?php echo base_url(); ?>media/images/cinema.jpg");
 
   /* Full height */
   height: 100%; 
@@ -40,9 +40,9 @@ body, html {
 
 <div class="bg">
 
-<video   class="video-size" onended="window.location = 'Question.html';"   autoplay muted >
-  <source src="media/videos/Head.mp4" type="video/mp4">
-  <source src="media/videos/Head.ogg" type="video/ogg">
+<video   class="video-size" onended="window.location = 'Question.html';"   autoplay  >
+  <source src="<?php echo base_url(); ?>media/videos/Avengers vs Thanos.mp4" type="video/mp4">
+  <source src="<?php echo base_url(); ?>media/videos/Avengers vs Thanos.ogg" type="video/ogg">
  </video>
 
 

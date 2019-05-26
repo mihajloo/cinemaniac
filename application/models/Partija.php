@@ -29,5 +29,13 @@ class Partija extends CI_Model{
         $this->db->where('i.IdPartija=p.IdPartija');
         return $this->db->order_by('p.Datum','desc')->limit(10)->get()->result();
     }
-   
+   public function brojIgraca($idP){
+       $this->db->from('partija p,gost g');
+       $this->db->where('p.IdPartija',$idP);
+       $gosti = $this->db->where('g.IdPartija=p.IdPartija')->count_all_results();
+       $this->db->from('partija p,igrao i');
+       $this->db->where('p.IdPartija',$idP);
+       $players = $this->db->where('p.IdPartija=i.IdPartija')->count_all_results();
+       return $gosti + $players;
+   }
 }
