@@ -47,7 +47,7 @@ if (xmlhttp.readyState==4 && xmlhttp.status==200)
  {
  var rez=xmlhttp.responseText;
  document.getElementById("txtHint").innerHTML="Players found: "+rez+"/4";
- if(rez == 2){
+ if(rez == 4){
      window.location.href="<?php $stranica = site_url($controller.'/chooseQuestions');  echo $stranica;?>";
  }
  }
