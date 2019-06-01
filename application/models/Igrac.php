@@ -65,6 +65,22 @@ class Igrac extends CI_Model {
         $this->db->where("i.Username=ig.Username");
         $this->db->group_by('i.Username');
         
-        return $this->db->order_by("SUM(ig.BrojPoena)")->limit(10)->get()->result();
+        return $this->db->order_by("SUM(ig.BrojPoena)",'desc')->limit(10)->get()->result();
     }
+     public function deleteKorisnik($username){
+         $this->db->where('Username', $username);
+        $this->db->delete('igrac');
+     }
+     
+     public function updateStatistics($username,$ishod){
+        $this->db->set('BrojPartija', 'BrojPartija+1', FALSE);
+       if($ishod=="win"){
+           $this->db->set('BrojPobeda', 'BrojPobeda+1', FALSE);
+       }
+       else if($ishod=="lose"){
+            $this->db->set('BrojPoraza', 'BrojPoraza+1', FALSE);
+       }
+        $this->db->where('Username',$username);
+        $this->db->update('igrac');
+     }
 }

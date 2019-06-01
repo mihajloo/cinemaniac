@@ -20,6 +20,12 @@ class Korisnik extends CI_Model {
         return $this->db->where('Username', $username)->get('korisnik')->row();
     }
     
+    public function dohvatiSveKorisnike(){
+         $this->db->select('Username,Password,Email ');
+        $this->db->from('korisnik');
+        return $this->db->get()->result();
+    }
+    
     public function ubaciUBazu($username, $password, $email) {
         $data = array(
             'Username' => $username,
@@ -28,5 +34,21 @@ class Korisnik extends CI_Model {
         );
 
         $this->db->insert('korisnik', $data);
+    }
+    public function searchUserByKey($key){
+        
+        $this->db->select('Username,Password,Email ');
+        $this->db->like('Username', $key);
+        $this->db->from('korisnik');
+        return $this->db->get()->result();
+    }
+    public function deleteKorisnik($username){
+       $this->db->where('Username', $username);
+        $this->db->delete('korisnik');
+         
+        //  $this->Moderator->deleteMod($username);
+         //   $this->Vip->deleteVip($username);
+          //    $this->Igrac->deleteIgrac($username);
+         
     }
 }

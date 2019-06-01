@@ -79,11 +79,15 @@ text-align:center;
   background-color: #999;
 cursor:default;
 }
+
 .win{
  background-color: #A2F6A7;
 }
 .lose{
  background-color: #F16464;
+}
+.draw{
+ background-color: #FFDF00;
 }
 .vertical-menu p {
   

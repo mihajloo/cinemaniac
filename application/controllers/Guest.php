@@ -61,15 +61,18 @@ class Guest extends CI_Controller{
             $korisnik = new stdClass();
             $korisnik->regUser = $this->Korisnik->dohvatiKorisnika($username);
             
-            if($korisnik != null) {
+            if($korisnik->regUser != null) {
                 if($korisnik->regUser->Password == $password) {
                    
                  //   echo $korisnik->IdKorisnik;
                     if($this->Admin->proveriAdmina($username)) {
+                      
+                        $this->session->set_userdata('korisnik', $korisnik);
                         redirect('AdminC');                      
                     }
                     
                     if($this->Moderator->proveriModeratora($username)) {
+                        $this->session->set_userdata('korisnik', $korisnik);
                         redirect('ModeratorC');
                     }
                     
@@ -79,6 +82,7 @@ class Guest extends CI_Controller{
                         redirect('RegularUser');
                     }
                     else {
+                        $this->session->set_userdata('korisnik', $korisnik);
                         redirect('VipC');
                     }
                 }
@@ -122,7 +126,8 @@ class Guest extends CI_Controller{
             if($korisnik == null) {
                 $this->Korisnik->ubaciUBazu($username, $password, $email);
                 $this->Igrac->ubaciUBazu($username);
-                $this->prikazi('MainPage.php');
+               // $this->prikazi('MainPage.php');
+                redirect('Guest');
                 }
             else {
                 $content['poruka'] = 'This username is already taken.';

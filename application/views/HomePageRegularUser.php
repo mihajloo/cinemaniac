@@ -6,7 +6,11 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>mystyle.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>user.css">
-
+ <style>
+       .draw{
+        background-color: #FFDF00;
+        }
+        </style>
 </head>
 
 
@@ -40,7 +44,7 @@
 
 <div  class="col-8" >
     <div id="demo1" class="centar"  valign="top" <?php if($str == 2) echo "style='display:block'"; else echo "style='display:none'";?>>
-<p><font color=#FFDF00 size=20px>Wins: <?php echo $brPobeda ?> <br> <br> Losses: <?php echo $brPoraza ?> <br><br>  Win Ratio: <?php echo $procenat ?>% <br><br> Average: <?php echo $avg ?>p per Game</font></p>
+ <p><font color=#FFDF00 size=20px>Wins: <?php echo $brPobeda ?> <br> <br> Losses: <?php echo $brPoraza ?> <br><br>  Win Ratio: <?php echo number_format((float)$procenat, 2, '.', ''); ?>% <br><br> Average: <?php echo number_format((float)$avg, 2, '.', ''); ?>p per Game</font></p>
 </div>
 <div id="demo2" class="centar"  <?php if($str == 3) echo "style='display:block'"; else echo "style='display:none'";?>>
 <div  class="vertical-menu">
@@ -82,7 +86,7 @@
 </div>
 <div id="demo0"  <?php if($str == 1) echo "style='display:block'"; else echo "style='display:none'";?>>
 		<img src="<?php echo base_url(); ?>media/images/logo2.png" style="max-width:100%;">
-		</div>
+</div>
 </div>
 
 

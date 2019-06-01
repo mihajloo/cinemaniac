@@ -73,21 +73,11 @@ class RegularUser extends CI_Controller {
         $this->prikazi('HomePageRegularUser.php',$poruka);
     }
     
-    public function matchHistory(){
+     public function matchHistory(){
       $korisnik = $this->session->userdata('korisnik');
-      $dohvatiPartije  = $this->Partija->dohvatiPartijeNajskorije($korisnik->regUser->Username);
-     $arr = array();
-       foreach($dohvatiPartije as $partija){
-           $clan = new stdClass();
-           $clan->partija = $partija;
-            if($this->Igrac->pobedioPartiju($korisnik->regUser->Username,$partija->IdPartija)){
-                $clan->pobedio = "win";
-            }
-            else $clan->pobedio = "lose";
-            array_push($arr,$clan);
-           
-        }
-      $poruka['partije'] = $arr;
+        $dohvatiPartije  = $this->Igrao->dohvatiPartijeNajskorije($korisnik->regUser->Username);
+     
+      $poruka['partije'] = $dohvatiPartije;
       $poruka['str'] = 3;
       $this->prikazi('HomePageRegularUser.php',$poruka);
     }
@@ -95,6 +85,10 @@ class RegularUser extends CI_Controller {
         $poruka['igraci'] = $this->Igrac->dohvatiTop10Igraca();
         $poruka['str'] = 4;
         $this->prikazi('HomePageRegularUser.php',$poruka);
+    }
+    public function deleteRegularUser($username){
+        $this->Igrac->deleteKorisnik($username);
+        
     }
     
 }

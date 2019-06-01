@@ -22,12 +22,38 @@ class Partija extends CI_Model{
         $this->db->where('Username',$username);
         return $this->db->get()->result();
     }
-    public function dohvatiPartijeNajskorije($username){
-        $this->db->select('i.IdPartija AS IdPartija,i.BrojPoena AS BrojPoena');
-        $this->db->from('igrao i,partija p');
-        $this->db->where('i.Username',$username);
-        $this->db->where('i.IdPartija=p.IdPartija');
-        return $this->db->order_by('p.Datum','desc')->limit(10)->get()->result();
+   
+    
+    public function dohvatiBrojIgraca($idP){
+       $this->db->select('BrojIgraca');
+       $this->db->from('partija');
+       $this->db->where('IdPartija',$idP);
+       return $this->db->get()->row()->BrojIgraca;
     }
+
+    public function dohvatiPraznuPartiju(){
+       $this->db->select('IdPartija,BrojIgraca');
+       $this->db->from('partija');
+       $this->db->where('BrojIgraca<>4');
+       $part = $this->db->get()->row();
+       if($part!=null){
+           $this->db->where('IdPartija',$part->IdPartija);
+           $this->db->update('partija',['BrojIgraca' => ($part->BrojIgraca +1)]);
+           return $part->IdPartija;
+       }
+       else{
+           $this->db->insert('partija',['Datum' => date('Y-m-d'),'BrojIgraca'=>1]);
+           return $this->db->insert_id();
+       }
+    }
+       public function dodajIgraca($Username){
+           $this->db->trans_start();
+           $id = $this->dohvatiPraznuPartiju();
+           $this->db->insert('igrao',['Username'=>$Username,'IdPartija'=>$id,'BrojPoena'=>0]);
+           $this->db->trans_complete();
+           return $id;
+           
+       }
+   
    
 }
