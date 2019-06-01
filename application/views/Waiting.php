@@ -11,16 +11,27 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>mystyle.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>user.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
+        <style>
+              .play{
+            font-size: 30px;
+            margin-top: 25%;
+            transform: translateY(-50%);
+            } 
+    </style>
 
     </head>
     
     <body>
+<div class = "container" >
+<div class = "row" >
+<div class = "col">
+    <div class="play">
       <div class="spinner-border text-primary" role="status">
-  <span class="sr-only">Loading...</span>
+      <span class="sr-only">Loading...</span>
     </div>
-        <div id='txtHint'></div>   
-        <script>  
+     <div id='txtHint'>Finding players ...</div>   
+</div></div></div> </div>       
+     <script>  
 setInterval(function f() {
 if (window.XMLHttpRequest)
 {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -35,15 +46,15 @@ xmlhttp.onreadystatechange=function()
 if (xmlhttp.readyState==4 && xmlhttp.status==200)
  {
  var rez=xmlhttp.responseText;
- document.getElementById("txtHint").innerHTML=rez;
- if(rez == 4){
-     window.location.href="<?php $stranica = site_url('VipC/game');  echo $stranica;?>";
+ document.getElementById("txtHint").innerHTML="Players found: "+rez+"/4";
+ if(rez == 2){
+     window.location.href="<?php $stranica = site_url($controller.'/chooseQuestions');  echo $stranica;?>";
  }
  }
 }
-xmlhttp.open("GET","<?php $stranica = site_url('VipC/dohvatiPartiju');  echo $stranica;?>",true);
+xmlhttp.open("GET","<?php $stranica = site_url($controller.'/dohvatiPartiju');  echo $stranica;?>",true);
 xmlhttp.send();
-},1000);
+},200);
     </script>
     </body>
 </html>    

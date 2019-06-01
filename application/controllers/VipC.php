@@ -36,7 +36,11 @@ class VipC extends CI_Controller {
         
         
     }
-    
+    private function cmp($a, $b){
+     if($a->BrojPoena == $b->BrojPoena) return 0;
+     else if ($a->BrojPoena > $b->BrojPoena) return -1;
+     else return 1;
+    }
     private function prikazi($page, $content = []) {
         $this->load->view($page, $content);
     }
@@ -74,19 +78,9 @@ class VipC extends CI_Controller {
     
     public function matchHistory(){
       $korisnik = $this->session->userdata('korisnik');
-      $dohvatiPartije  = $this->Partija->dohvatiPartijeNajskorije($korisnik->regUser->Username);
-     $arr = array();
-       foreach($dohvatiPartije as $partija){
-           $clan = new stdClass();
-           $clan->partija = $partija;
-            if($this->Igrac->pobedioPartiju($korisnik->regUser->Username,$partija->IdPartija)){
-                $clan->pobedio = "win";
-            }
-            else $clan->pobedio = "lose";
-            array_push($arr,$clan);
-           
-        }
-      $poruka['partije'] = $arr;
+     $dohvatiPartije  = $this->Igrao->dohvatiPartijeNajskorije($korisnik->regUser->Username);
+     
+      $poruka['partije'] = $dohvatiPartije;
       $poruka['str'] = 3;
       $this->prikazi('HomePageVip.php',$poruka);
     }
@@ -107,12 +101,12 @@ class VipC extends CI_Controller {
         $this->prikazi('HomePageVip.php',$poruka);
     }
     public function insertQuestion(){
-        $this->form_validation->set_rules('q', 'q', 'required');
-        $this->form_validation->set_rules('cor', 'cor', 'required');
-        $this->form_validation->set_rules('wra1', 'wra1', 'required');
-        $this->form_validation->set_rules('wra2', 'wra2', 'required');
-        $this->form_validation->set_rules('wra3', 'wra3', 'required');
-        $this->form_validation->set_rules('idS', 'idS', 'required');
+        $this->form_validation->set_rules('q', 'Question', 'required|max_length[45]');
+        $this->form_validation->set_rules('cor', 'Correct Answer', 'required|max_length[40]');
+        $this->form_validation->set_rules('wra1', 'Wrong Answer 1', 'required|max_length[40]');
+        $this->form_validation->set_rules('wra2', 'Wrong Answer 2', 'required|max_length[40]');
+        $this->form_validation->set_rules('wra3', 'Wrong Answer 3', 'required|max_length[40]');
+       $idS = $this->input->post('idS'); 
         if($this->form_validation->run()){
            
             $question = $this->input->post('q');
@@ -120,7 +114,7 @@ class VipC extends CI_Controller {
             $wa1 = $this->input->post('wra1');
             $wa2 = $this->input->post('wra2');
             $wa3 = $this->input->post('wra3'); 
-            $idS = $this->input->post('idS'); 
+            
             $odobreno = 'nije';
             $idCA = $this->Odgovor->insertOdgovor($ca);
             $idWA1 = $this->Odgovor->insertOdgovor($wa1);
@@ -132,19 +126,180 @@ class VipC extends CI_Controller {
             $this->NetacanOdgovorNa->ubaciNetacanOdgovor($idQ,$idWA3);
             redirect('VipC');
         }
+        else{
+            $this->showQuestion($idS);
+        }
     }
     public function back(){
         $this->showInserts();
     }
     public function dohvatiPartiju(){
-       $brIgraca =$this->Partija->brojIgraca(1);
-       echo $brIgraca;
+       $idP = $this->session->userdata('partija');
+       $part =$this->Partija->dohvatiBrojIgraca($idP);
+       echo $part;
     }
     public function play(){
-        //$poruka['brIgraca'] = $this->Partija->brojIgraca(1);
-        $this->prikazi('Waiting.php');
+        $korisnik = $this->session->userdata('korisnik');
+         
+        $id = $this->Partija->dodajIgraca($korisnik->regUser->Username);
+        $this->session->set_userdata('partija',$id);
+        $poruka['controller'] = 'VipC';
+        $this->prikazi('Waiting.php',$poruka);
     }
-    public function game(){
-         $this->prikazi('game.php');
+    
+    public function chooseQuestions(){
+        $idP = $this->session->userdata('partija');
+        $pitanja = $this->BiloU->dohvatiPitanjaZaPartiju($idP);
+        if($pitanja==NULL){
+        $pitanja = $this->Pitanje->izaberiPitanja();
+        foreach ($pitanja as $pitanje){
+            $this->BiloU->pitanjeZaPartiju($idP,$pitanje->IdPitanje);
+        }
+        }
+        $poruka['controller'] = "VipC";
+        $this->session->set_userdata('pitanja',$pitanja);
+        $this->prikazi('ReadySet.php',$poruka);
+       // $this->game(0);
+    }
+    public function screen321(){
+        $poruka['controller'] = "VipC";
+        $this->prikazi('Screen321.php',$poruka);
+    }
+    public function go(){
+        $poruka['controller'] = "VipC";
+        $this->prikazi('Go.php',$poruka);
+    }
+
+    public function questionScreen($br){
+        $pitanja = $this->session->userdata('pitanja');
+        if($br < count($pitanja)){
+        $poruka['br'] = $br;
+        $poruka['controller'] = "VipC";
+        $this->prikazi('QuestionText.php',$poruka);
+        }
+        else{
+            $this->declareOutcome();
+        }
+    }
+    public function game($br){
+        $pitanja = $this->session->userdata('pitanja');
+        $poruka['scena'] = $pitanja[$br]->Naziv;
+        $poruka['broj'] = $br;
+        $poruka['controller'] = "VipC";
+        $this->prikazi('Game.php',$poruka);   
+    }
+   
+
+  
+    
+    public function declareOutcome(){
+       // $this->session->unset_userdata('pitanja');
+       // $this->session->unset_userdata('partija');
+        $idP = $this->session->userdata('partija');
+        $arrayIgrac = $this->Igrao->dohvatiRezultate($idP);
+        $arrayGost  = $this->Gost->dohvatiRezultate($idP);
+        $results = array_merge($arrayIgrac,$arrayGost);
+        usort($results, array($this,'cmp'));
+        $outcome = "lose"; 
+        //$brPoena = -1;
+       $username = $this->session->userdata('korisnik')->regUser->Username;
+        foreach ($results as $result){
+            
+            if($result->Username ==  $username){
+                if($result->BrojPoena == $results[0]->BrojPoena){
+                    if($results[0]->BrojPoena == $results[1]->BrojPoena){
+                        $outcome = "draw";
+                        break;
+                    }
+                    else {
+                        $outcome = "win";
+                        break;
+                    }
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        $this->Igrao->dodajIshod($outcome,$idP,$username);
+        $this->Igrac->updateStatistics($username,$outcome);
+        $poruka['results'] = $results;
+        $poruka['outcome'] = $outcome.'1';
+        $poruka['controller'] = "VipC";
+        $this->prikazi("EndScreen.php",$poruka);
+    }
+
+    public function pitanje($br){
+        $pitanja = $this->session->userdata('pitanja');
+        $idPitanje = $pitanja[$br]->IdPitanje;
+        $tacan = $this->Pitanje->dohvTacan($idPitanje);
+        $netacni = $this->Pitanje->dohvNetacne($idPitanje);
+        $odg1 = rand(0, 3);
+        $poruka['pitanje'] = $pitanja[$br]->Tekst;
+        $poruka['odgovor'.$odg1] = $tacan->Tekst;
+        $poruka['id'.$odg1] = $tacan->IdOdgovor;
+        $poruka['br'] = $br;
+        $i=0;
+        shuffle($netacni);
+        $j=0;
+        for($i=0;$i<4;$i++){
+        if($i == $odg1){continue;}
+        $poruka['odgovor'.$i] = $netacni[$j]->Tekst;
+        $poruka['id'.$i] = $netacni[$j]->IdOdgovor;
+        $j++;
+        }
+        $poruka['controller'] = "VipC";
+        $this->prikazi('Question.php',$poruka);
+    }
+    public function proveraOdgovora($br){
+        $pitanja = $this->session->userdata('pitanja');
+        $idPitanje = $pitanja[$br]->IdPitanje;
+        $odg =  $this->Pitanje->dohvTacan($idPitanje);
+       
+        echo $odg->IdOdgovor;
+        
+    }
+    
+    public function updatePoints($points){
+       $idP = $this->session->userdata('partija');
+       $username = $this->session->userdata('korisnik')->regUser->Username;
+       $this->Igrao->dodajPoene($idP,$username,$points);
+    }
+    
+    public function likeQuestion($br){
+        $pitanja = $this->session->userdata('pitanja');
+        $idPitanje = $pitanja[$br]->IdPitanje;
+        $this->Pitanje->reactToQuestion($idPitanje,'Likes');
+    }
+    
+    public function dislikeQuestion($br){
+        $pitanja = $this->session->userdata('pitanja');
+        $idPitanje = $pitanja[$br]->IdPitanje;
+        $this->Pitanje->reactToQuestion($idPitanje,'Dislikes');
+    }
+  
+    public function checkResults($br){
+        $idP = $this->session->userdata('partija');
+        $array = $this->Igrao->dohvatiRezultate($idP);
+        $arrayGost  = $this->Gost->dohvatiRezultate($idP);
+        $results = array_merge($array,$arrayGost);
+        usort($results, array($this,'cmp'));
+        $poruka['results'] = $results;
+        $poruka['br'] = $br;
+        $poruka['controller'] = "VipC";
+        $this->prikazi("Points.php",$poruka);              
+    }
+    private function unsetData(){
+        $this->session->unset_userdata('partija');
+        $this->session->unset_userdata('pitanja'); 
+    }
+    public function goToMenu(){
+        $this->unsetData();
+        redirect('VipC');
+    }
+ 
+    public function playAgain(){
+        $this->unsetData();
+        $this->play();
     }
 }

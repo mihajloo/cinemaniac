@@ -2,10 +2,10 @@
 <html>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>mystyle.css">
@@ -43,75 +43,409 @@ text-align:center;
  color: #FFDF00;
  hover: #FFDF00;
 	color:#FFDF00;
- 
+        
 }
 
 .butt:hover, .butt:focus {
   color: #FFDF00;
   border-width:5px;
 }
+.bounce-in-fwd {
+	-webkit-animation: bounce-in-fwd 1.1s both;
+	        animation: bounce-in-fwd 1.1s both;
+}
 
+@-webkit-keyframes bounce-in-fwd {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: scale(0.84);
+            transform: scale(0.84);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  89% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+}
+@keyframes bounce-in-fwd {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: scale(0.84);
+            transform: scale(0.84);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  89% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+}
+.bounce-in-fwd2 {
+	-webkit-animation: bounce-in-fwd 1s infinite both;
+	        animation: bounce-in-fwd 1s infinite both;
+}
+/* ----------------------------------------------
+ * Generated by Animista on 2019-5-31 17:26:0
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
 
+/**
+ * ----------------------------------------
+ * animation bounce-in-fwd
+ * ----------------------------------------
+ */
+@-webkit-keyframes bounce-in-fwd2 {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: scale(0.84);
+            transform: scale(0.84);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  89% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+}
+@keyframes bounce-in-fwd2 {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: scale(0.84);
+            transform: scale(0.84);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  89% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+}
+body{
+    overflow-y: hidden;
+}
 </style>
 <head>
-<link rel="stylesheet" type="text/css" href="mystyle.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>mystyle.css">
 <body>
+    
 <div class="container">
 <div class="row" style="margin-top:50px;">
 <div class="col">
-<div class="ffont" style="text-align:center"><h1><font color=#FFDF00>What did Thanos say to Thor?</font><h1></div>
+<div class="ffont bounce-in-fwd" style="text-align:center"><h1><font color=#FFDF00><?php echo $pitanje; ?></font><h1></div>
 </div></div>
+<div class=" bounce-in-fwd">    
 <div class="row" style="margin-top:50px;">
 <div class="col-6">
-<button id="a0" class="butt" style="float:right" onclick="f('a0')"><font size="8px" style="font-family:'Leftovers'">Subscribe to Pewdiepie!</font></button>
+<button id="<?php echo $id0;?>"  class="butt " style="float:right" onclick="f(<?php echo $id0;?>)"><font size="8px" style="font-family:'Leftovers'"><?php echo $odgovor0; ?></font></button>
 </div>
 <div class="col-6">
-<button id="a1" class="butt" style="float:left" onclick="f('a1')"><font size="8px" style="font-family:'Leftovers'">Aaaaah that's hot, that's hot!</font></button>
+<button id="<?php echo $id1;?>"  class="butt " style="float:left" onclick="f(<?php echo $id1;?>)"><font size="8px" style="font-family:'Leftovers'"><?php echo $odgovor1; ?></font></button>
 </div>
 </div>
 
 <div class="row" style="margin-top:50px;">
 
 <div class="col-6">
-<button id="a2" class="butt" style="float:right" onclick="f('a2')"><font size="8px" style="font-family:'Leftovers'">I did not hit her, I did naaaawt!</font></button>
+<button id="<?php echo $id2;?>"class="butt "  style="float:right" onclick="f(<?php echo $id2;?>)"><font size="8px" style="font-family:'Leftovers'"><?php echo $odgovor2; ?></font></button>
 </div>
 <div class="col-6">
-<button id="a3" class="butt" style="float:left" onclick="f('a3')"><font size="8px" style="font-family:'Leftovers'">You should have gone for the head.</font></button>
+<button id="<?php echo $id3;?>" class="butt " style="float:left" onclick="f(<?php echo $id3;?>)"><font size="8px" style="font-family:'Leftovers'"><?php echo $odgovor3; ?></font></button>
 </div>
 </div>
-
+</div>
 
 <div class="row" style="margin-top:50px;">
 <div class="col">
-<i onclick="myFunction(this)" class="fa fa-thumbs-up" style="font-size:30px" style="float:right"><div style="font-family:'Galindo'">Like Question</div></i>
+<i id="like" onclick="likeQuestion()" class="fa fa-thumbs-up bounce-in-fwd" style="font-size:30px" style="float:right"><div style="font-family:'Galindo'">Like Question</div></i>
 </div>
+<div class="col"><div id="reaction" style="font-size:30px;color:#FFDF00;"></div></div>   
 <div class="col">
-<i onclick="myFunction(this)" class="fa fa-thumbs-down" style="font-size:30px" style="float:left" color=#FFDF00><div style="font-family:'Galindo'">Dislike Question</div></i>
+<i id="dislike" onclick="dislikeQuestion()" class="fa fa-thumbs-down bounce-in-fwd" style="font-size:30px" style="float:left" color=#FFDF00><div style="font-family:'Galindo'">Dislike Question</div></i>
 </div>
 </div>
-<div id="countdown"></div>
+
+<div id="countdown" class="bounce-in-fwd2"></div>
+
 <script>
-var x=1;
-function f(str) {
-if(x==1){
-	document.getElementById(str).style.backgroundColor = "#FFDF00";
-   document.getElementById(str).style.color="#000";
-	x=2;
-  }
-}
+var odg;
 var timeleft = 15;
 document.getElementById("countdown").style.fontSize = "50px";
 var downloadTimer = setInterval(function(){
-  if(timeleft<=10)
-  document.getElementById("countdown").innerHTML = timeleft;
-  timeleft -= 1;
-  if(timeleft==4) {document.getElementById("countdown").style.color="red";
+  if(timeleft<=10){
+  if(timeleft == 5) {document.getElementById("countdown").style.color="red";
   document.getElementById("countdown").style.fontSize = "60px";
   }
-  if(timeleft <= 0){
-    window.location.href = 'Points.html';
+  if(timeleft == 0){
+  window.location.href = "<?php $stran = site_url($controller.'/checkResults/'.$br);  echo $stran;?> "
   }
-}, 1000);
+  else{document.getElementById("countdown").innerHTML = timeleft;
+  timeleft -= 1;
+  }
+} else {timeleft -= 1;}}, 1000);
+
+function proveraOdgovora(par) {
+odg = par;
+if (window.XMLHttpRequest)
+{// code for IE7+, Firefox, Chrome, Opera, Safari
+ xmlhttp=new XMLHttpRequest();
+}
+else
+{// code for IE6, IE5
+ xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+xmlhttp.onreadystatechange=function()
+{
+if (xmlhttp.readyState==4 && xmlhttp.status==200)
+ {
+ var rez=xmlhttp.responseText;
+
+
+ if(rez==odg){
+        
+	document.getElementById(odg).style.backgroundColor = "#00FF00";
+        updatePoeni();
+        }
+    else{
+        document.getElementById(odg).style.backgroundColor = "#FF0000";
+        }
+    document.getElementById(odg).style.color="#000";
+ }
+};
+xmlhttp.open("GET","<?php $str = site_url($controller.'/proveraOdgovora/'.$br);  echo $str;?>",true);
+xmlhttp.send();
+}
+
+function updatePoeni() {
+if (window.XMLHttpRequest)
+{// code for IE7+, Firefox, Chrome, Opera, Safari
+ xmlhttp=new XMLHttpRequest();
+}
+else
+{// code for IE6, IE5
+ xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+xmlhttp.onreadystatechange=function()
+{
+if (xmlhttp.readyState==4 && xmlhttp.status==200)
+ {
+ }
+}
+var urlString = "<?php $stranica = site_url($controller.'/updatePoints');  echo $stranica;?>";
+urlString += "/" + timeleft; 
+xmlhttp.open("GET",urlString,true);
+xmlhttp.send();
+}
+
+var x=1;
+function f(str) {
+if(x==1){
+        proveraOdgovora(str);
+	x=2;
+        }
+}
+
+function likeQuestion(){
+    if (window.XMLHttpRequest)
+{// code for IE7+, Firefox, Chrome, Opera, Safari
+ xmlhttp=new XMLHttpRequest();
+}
+else
+{// code for IE6, IE5
+ xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+xmlhttp.onreadystatechange=function()
+{
+if (xmlhttp.readyState==4 && xmlhttp.status==200)
+ {
+     document.getElementById("reaction").innerHTML = "Thank you for your input!";
+     document.getElementById("like").onclick = null;
+     document.getElementById("dislike").onclick = null;
+ }
+}
+var urlString = "<?php $stranica = site_url($controller.'/likeQuestion/'.$br);  echo $stranica;?>";
+xmlhttp.open("GET",urlString,true);
+xmlhttp.send();
+}
+
+function dislikeQuestion(){
+    if (window.XMLHttpRequest)
+{// code for IE7+, Firefox, Chrome, Opera, Safari
+ xmlhttp=new XMLHttpRequest();
+}
+else
+{// code for IE6, IE5
+ xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+xmlhttp.onreadystatechange=function()
+{
+if (xmlhttp.readyState==4 && xmlhttp.status==200)
+ {
+     document.getElementById("reaction").innerHTML = "Thank you for your input!";
+     document.getElementById("like").onclick = null;
+     document.getElementById("dislike").onclick = null;
+ }
+}
+var urlString = "<?php $stranica = site_url($controller.'/dislikeQuestion/'.$br);  echo $stranica;?>";
+xmlhttp.open("GET",urlString,true);
+xmlhttp.send();
+}
 </script>
 </body>
 </html>

@@ -12,7 +12,11 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>user.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-
+        <style>
+       .draw{
+        background-color: #FFDF00;
+        }
+        </style>
     </head>
 
 
@@ -52,7 +56,7 @@
                     </div>
                     <div id="demo1" class="centar"  valign="top" <?php if ($str == 2) echo "style='display:block'";
 else echo "style='display:none'"; ?>>
-                        <p><font color=#FFDF00 size=20px>Wins: <?php echo $brPobeda ?> <br> <br> Losses: <?php echo $brPoraza ?> <br><br>  Win Ratio: <?php echo $procenat ?>% <br><br> Average: <?php echo $avg ?>p per Game</font></p>
+                        <p><font color=#FFDF00 size=20px>Wins: <?php echo $brPobeda ?> <br> <br> Losses: <?php echo $brPoraza ?> <br><br>  Win Ratio: <?php echo number_format((float)$procenat, 2, '.', ''); ?>% <br><br> Average: <?php echo number_format((float)$avg, 2, '.', ''); ?>p per Game</font></p>
                     </div>
                     <div id="demo2" class="centar" <?php if ($str == 3) echo "style='display:block'";
 else echo "style='display:none'"; ?>>
@@ -63,15 +67,15 @@ else echo "style='display:none'"; ?>>
                                 $str .= "<div class='row'>";
                                 $str .= "<div class='col-4'>";
 
-                                $str .= "<p class=" . $partija->pobedio . ">";
-                                if ($partija->pobedio == "win") {
-                                    $str .= "WIN";
-                                } else
-                                    $str .= "LOSS";
+                                $str .= "<p class=" . $partija->Ishod . ">";
+                                $str.= strtoupper($partija->Ishod);
                                 $str .= "</p></div>";
-                                $str .= "<div class= 'col-8'>";
-                                $str .= "<p class=" . $partija->pobedio . ">";
-                                $str .= "Points: " . $partija->partija->BrojPoena . "p</p></div></div>";
+                                $str .= "<div class= 'col-4'>";
+                                $str .= "<p class=" . $partija->Ishod . ">";
+                                $str .= "Points: " . $partija->BrojPoena . "p</p></div>";
+                                $str .= "<div class= 'col-4'>";
+                                $str .= "<p class=" . $partija->Ishod . ">";
+                                $str .= "Date: " . $partija->Datum . "</p></div></div>";
                                 echo $str;
                             }
                             ?>
@@ -88,8 +92,9 @@ else echo "style='display:none'"; ?>>
                                 $str = "";
                                 $str .= "<div class='red'><div class='spot'>";
                                 $str .= $i . "</div><div class='name'>";
-                                $str .= $igrac->Username . "</div><div class='score'>" . $igrac->Poeni . "</div></div></div>";
+                                $str .= $igrac->Username . "</div><div class='score'>" . $igrac->Poeni . "</div></div>";
                                 echo $str;
+                                $i++;
                             }
                             ?>
 
@@ -157,7 +162,21 @@ else echo "style='display:none'"; ?>>
                         $videoStr .= "</video><br>";
                         echo $videoStr;
                         ?>	
-
+                        <div class='row'>
+                        <div class='col'><?php echo form_error("q","<font color='red' style='font-size:20px;'>","</font>"); ?></div>
+                        </div>
+                        <div class='row'>
+                        <div class='col'><?php echo form_error("cor","<font color='red' style='font-size:20px;'>","</font>"); ?></div>
+                        </div>
+                       <div class='row'>
+                        <div class='col'><?php echo form_error("wra1","<font color='red' style='font-size:20px;'>","</font>"); ?></div>
+                        </div>
+                        <div class='row'>
+                        <div class='col'><?php echo form_error("wra2","<font color='red' style='font-size:20px;'>","</font>"); ?></div>
+                        </div>
+                        <div class='row'>
+                        <div class='col'><?php echo form_error("wra3","<font color='red' style='font-size:20px;'>","</font>"); ?></div>
+                        </div>  
 
                         <form name='submitQuestion'>
 
@@ -167,7 +186,7 @@ else echo "style='display:none'"; ?>>
                                     <font  color=#FFDF00 >Q:</font> 
                                 </div>	
                                 <div class="col-11">
-                                    <input type="text" name="Question" placeholder="Enter your question" maxlength="45" ><br>
+                                    <input type="text" name="Question" placeholder="Enter your question"  ><br>
 
                                 </div>	
                             </div>
@@ -176,7 +195,7 @@ else echo "style='display:none'"; ?>>
                                     <font  color=#FFDF00 >C.A:</font> 
                                 </div>	
                                 <div class="col-11">	
-                                    <input type="text" id='CA' name="CA" placeholder="Enter your correct answer" maxlength="45" ><br>
+                                    <input type="text" id='CA' name="CA" placeholder="Enter your correct answer"  ><br>
                                 </div>
                             </div>
                             <div class="row">
@@ -184,7 +203,7 @@ else echo "style='display:none'"; ?>>
                                     <font  color=#FFDF00 >W.A:</font> 
                                 </div>	
                                 <div class="col-11">	
-                                    <input type="text" name="WA1" placeholder="Enter your wrong answer" maxlength="45"><br>
+                                    <input type="text" name="WA1" placeholder="Enter your wrong answer"><br>
 
                                 </div>
 
@@ -194,7 +213,7 @@ else echo "style='display:none'"; ?>>
                                     <font  color=#FFDF00 >W.A:</font> 
                                 </div>	
                                 <div class="col-11">	
-                                    <input type="text" name="WA2" placeholder="Enter your wrong answer" maxlength="45" ><br>
+                                    <input type="text" name="WA2" placeholder="Enter your wrong answer"  ><br>
 
                                 </div>
                             </div>
@@ -203,7 +222,7 @@ else echo "style='display:none'"; ?>>
                                     <font  color=#FFDF00 >W.A:</font> 
                                 </div>	
                                 <div class="col-11">	
-                                    <input type="text" name="WA3" placeholder="Enter your wrong answer" maxlength="45"><br>
+                                    <input type="text" name="WA3" placeholder="Enter your wrong answer" ><br>
                                     <input type="hidden" name="idScena" maxlength="45" value="<?php echo $scena->IdScena ?>">
                                 </div>
                             </div>

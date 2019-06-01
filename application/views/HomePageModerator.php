@@ -29,7 +29,7 @@
           <p style="font-size:30px;">Are you sure?</p>
         </div>
         <div  style="align:center" >
-            <form action="<?php echo site_url('ModeratorC/editQuestion') ?>" method="post" name='formEditQuestion'>
+            <form action="<?php echo site_url('ModeratorC/editQuestion/'.$accept) ?>" method="post" name='formEditQuestion'>
             <input type="hidden" name="q" value="">
             <input type="hidden" name="cor" value="">
             <input type="hidden" name="wra1" value="">
@@ -167,7 +167,21 @@ $('#deleteModal').on('show.bs.modal', function(e) {
         echo $videoStr;
 ?>	
 	
-	
+	<div class='row'>
+         <div class='col'><?php echo form_error("q","<font color='red' style='font-size:20px;'>","</font>"); ?></div>
+         </div>
+         <div class='row'>
+         <div class='col'><?php echo form_error("cor","<font color='red' style='font-size:20px;'>","</font>"); ?></div>
+         </div>
+        <div class='row'>
+         <div class='col'><?php echo form_error("wra1","<font color='red' style='font-size:20px;'>","</font>"); ?></div>
+         </div>
+         <div class='row'>
+         <div class='col'><?php echo form_error("wra2","<font color='red' style='font-size:20px;'>","</font>"); ?></div>
+         </div>
+         <div class='row'>
+         <div class='col'><?php echo form_error("wra3","<font color='red' style='font-size:20px;'>","</font>"); ?></div>
+         </div>                       
 	<form name='submitQuestion'>
 	
 	<div class="row">

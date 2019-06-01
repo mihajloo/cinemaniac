@@ -57,18 +57,22 @@ class ModeratorC extends CI_Controller {
         }
         else  $this->questionBase();
    }
-    public function editQuestion(){
+    public function editQuestion($accept){
         $this->form_validation->set_rules('idQ', 'idQ', 'required');
-        $this->form_validation->set_rules('q', 'q', 'required');
-        $this->form_validation->set_rules('cor', 'cor', 'required');
-        $this->form_validation->set_rules('wra1', 'wra1', 'required');
-        $this->form_validation->set_rules('wra2', 'wra2', 'required');
-        $this->form_validation->set_rules('wra3', 'wra3', 'required');
         $this->form_validation->set_rules('wra1id', 'wra1id', 'required');
         $this->form_validation->set_rules('wra2id', 'wra2id', 'required');
         $this->form_validation->set_rules('wra3id', 'wra3id', 'required');
+        $idQ = $this->input->post('idQ');
+        $wa1id = $this->input->post('wra1id');
+        $wa2id = $this->input->post('wra2id');
+        $wa3id = $this->input->post('wra3id'); 
+        $this->form_validation->set_rules('q', 'Question', 'required|max_length[45]');
+        $this->form_validation->set_rules('cor', 'Correct Answer', 'required');
+        $this->form_validation->set_rules('wra1', 'Wrong Answer 1', 'required|max_length[40]');
+        $this->form_validation->set_rules('wra2', 'Wrong Answer 2', 'required|max_length[40]');
+        $this->form_validation->set_rules('wra3', 'Wrong Answer 3', 'required|max_length[40]');
         if($this->form_validation->run()){
-            $idQ = $this->input->post('idQ');
+       
             $question = $this->input->post('q');
             $ca = $this->input->post('cor');
             $wa1 = $this->input->post('wra1');
@@ -80,6 +84,9 @@ class ModeratorC extends CI_Controller {
             $odobreno = 'jeste';
             $this->Pitanje->updatePitanje($idQ,$question,$ca,$wa1,$wa2,$wa3,$wa1id,$wa2id,$wa3id,$odobreno);
             redirect('ModeratorC');
+        }
+        else{
+            $this->showQuestion($accept, $idQ);
         }
        
     }
