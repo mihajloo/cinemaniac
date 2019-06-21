@@ -25,14 +25,16 @@
 <div class = "container" >
 <div class = "row" >
 <div class = "col">
+    
     <div class="play">
       <div class="spinner-border text-primary" role="status">
       <span class="sr-only">Loading...</span>
     </div>
-     <div id='txtHint'>Finding players ...</div>   
+     <div id='txtHint'>Waiting for other players ...</div>   
 </div></div></div> </div>       
      <script>  
 setInterval(function f() {
+ 
 if (window.XMLHttpRequest)
 {// code for IE7+, Firefox, Chrome, Opera, Safari
  xmlhttp=new XMLHttpRequest();
@@ -43,21 +45,21 @@ else
 }
 xmlhttp.onreadystatechange=function()
 {
-if (xmlhttp.readyState==4 && xmlhttp.status==200)
- {
+if (xmlhttp.readyState==4 && xmlhttp.status==200){
  var rez=xmlhttp.responseText;
- document.getElementById("txtHint").innerHTML="Players found: "+rez+"/4";
+
  if(rez == 4){
-     window.location.href="<?php $stranica = site_url($controller.'/chooseQuestions');  echo $stranica;?>";
+     window.location.href="<?php $stranica = site_url($controller.'/checkResults/'.$br);  echo $stranica;?>";
  }
  }
 }
-xmlhttp.open("GET","<?php $stranica = site_url($controller.'/dohvatiPartiju');  echo $stranica;?>",true);
+xmlhttp.open("GET","<?php $stranica = site_url($controller.'/brojOdgovora/'.($br+1));  echo $stranica;?>",true);
 xmlhttp.send();
+
 },200);
 
     if(performance.navigation.type !==0){
-       window.location.href="<?php $stranica = site_url($controller.'/redirectPageWaiting');  echo $stranica;?>"; 
+       window.location.href="<?php $stranica = site_url($controller.'/redirectPage');  echo $stranica;?>"; 
     } 
 
     </script>

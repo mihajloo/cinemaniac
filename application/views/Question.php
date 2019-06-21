@@ -293,39 +293,42 @@ body{
 <div class=" bounce-in-fwd">    
 <div class="row" style="margin-top:50px;">
 <div class="col-6">
-<button id="<?php echo $id0;?>"  class="butt " style="float:right" onclick="f(<?php echo $id0;?>)"><font size="8px" style="font-family:'Leftovers'"><?php echo $odgovor0; ?></font></button>
+    <button id="<?php echo $id0;?>"  class="butt " style="float:right" onclick="f(<?php echo $id0;?>)"><font size="<?php if(strlen($odgovor0)<45) echo "6px"; else echo "5px;"?>"><?php echo $odgovor0; ?></font></button>
 </div>
 <div class="col-6">
-<button id="<?php echo $id1;?>"  class="butt " style="float:left" onclick="f(<?php echo $id1;?>)"><font size="8px" style="font-family:'Leftovers'"><?php echo $odgovor1; ?></font></button>
+<button id="<?php echo $id1;?>"  class="butt " style="float:left" onclick="f(<?php echo $id1;?>)"><font size="<?php if(strlen($odgovor1)<45) echo "6px"; else echo "5px;"?>" ><?php echo $odgovor1; ?></font></button>
 </div>
 </div>
 
 <div class="row" style="margin-top:50px;">
 
 <div class="col-6">
-<button id="<?php echo $id2;?>"class="butt "  style="float:right" onclick="f(<?php echo $id2;?>)"><font size="8px" style="font-family:'Leftovers'"><?php echo $odgovor2; ?></font></button>
+<button id="<?php echo $id2;?>"class="butt "  style="float:right" onclick="f(<?php echo $id2;?>)"><font size="<?php if(strlen($odgovor2)<45) echo "6px"; else echo "5px;"?>"><?php echo $odgovor2; ?></font></button>
 </div>
 <div class="col-6">
-<button id="<?php echo $id3;?>" class="butt " style="float:left" onclick="f(<?php echo $id3;?>)"><font size="8px" style="font-family:'Leftovers'"><?php echo $odgovor3; ?></font></button>
+<button id="<?php echo $id3;?>" class="butt " style="float:left" onclick="f(<?php echo $id3;?>)"><font size="<?php if(strlen($odgovor3)<45) echo "6px"; else echo "5px;"?>" ><?php echo $odgovor3; ?></font></button>
 </div>
 </div>
 </div>
+<?php if($controller !== "Guest"){
+   $str="";
+   $str.="<div class=\"row\" style=\"margin-top:50px;\"><div class=\"col\">";
+   $str.="<i id=\"like\" onclick=\"likeQuestion()\" class=\"fa fa-thumbs-up bounce-in-fwd\" style=\"font-size:30px\" style=\"float:right\"><div style=\"font-family:'Galindo'\">Like Question</div></i></div>" ;      
+   $str.="<div class=\"col\"><div id=\"reaction\" style=\"font-size:30px;color:#FFDF00;\"></div></div> "; 
+   $str.="<div class=\"col\">";
+   $str.="<i id=\"dislike\" onclick=\"dislikeQuestion()\" class=\"fa fa-thumbs-down bounce-in-fwd\" style=\"font-size:30px\" style=\"float:left\" color=#FFDF00><div style=\"font-family:'Galindo'\">Dislike Question</div></i>";
+   $str.="</div></div>";
+   echo $str;
+}
+   ?>
 
-<div class="row" style="margin-top:50px;">
-<div class="col">
-<i id="like" onclick="likeQuestion()" class="fa fa-thumbs-up bounce-in-fwd" style="font-size:30px" style="float:right"><div style="font-family:'Galindo'">Like Question</div></i>
-</div>
-<div class="col"><div id="reaction" style="font-size:30px;color:#FFDF00;"></div></div>   
-<div class="col">
-<i id="dislike" onclick="dislikeQuestion()" class="fa fa-thumbs-down bounce-in-fwd" style="font-size:30px" style="float:left" color=#FFDF00><div style="font-family:'Galindo'">Dislike Question</div></i>
-</div>
-</div>
-
+   
 <div id="countdown" class="bounce-in-fwd2"></div>
 
 <script>
 var odg;
 var timeleft = 15;
+var odgovorio = 1;
 document.getElementById("countdown").style.fontSize = "50px";
 var downloadTimer = setInterval(function(){
   if(timeleft<=10){
@@ -333,12 +336,14 @@ var downloadTimer = setInterval(function(){
   document.getElementById("countdown").style.fontSize = "60px";
   }
   if(timeleft == 0){
-  window.location.href = "<?php $stran = site_url($controller.'/checkResults/'.$br);  echo $stran;?> "
+      document.getElementById("countdown").innerHTML="";
+     window.location.href="<?php $stranica = site_url($controller.'/waitForPlayers/'.$br);  echo $stranica;?>";
   }
   else{document.getElementById("countdown").innerHTML = timeleft;
   timeleft -= 1;
   }
 } else {timeleft -= 1;}}, 1000);
+
 
 function proveraOdgovora(par) {
 odg = par;
@@ -366,8 +371,10 @@ if (xmlhttp.readyState==4 && xmlhttp.status==200)
         document.getElementById(odg).style.backgroundColor = "#FF0000";
         }
     document.getElementById(odg).style.color="#000";
+
  }
 };
+
 xmlhttp.open("GET","<?php $str = site_url($controller.'/proveraOdgovora/'.$br);  echo $str;?>",true);
 xmlhttp.send();
 }
@@ -446,6 +453,10 @@ var urlString = "<?php $stranica = site_url($controller.'/dislikeQuestion/'.$br)
 xmlhttp.open("GET",urlString,true);
 xmlhttp.send();
 }
+    if(performance.navigation.type !==0){
+       window.location.href="<?php $stranica = site_url($controller.'/redirectPage');  echo $stranica;?>"; 
+    } 
+
 </script>
 </body>
 </html>

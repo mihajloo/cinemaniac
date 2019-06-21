@@ -19,7 +19,7 @@
 <div class="container">
 <div class="row">
 <div class="col-8">
-<p class="quote" ><i>Welcome!</i></p>
+<p class="quote" >Welcome!</p>
 </div>
 <div class="col-4">
 <button class="signout" class="col-4" onclick="window.location.href = '<?php echo site_url('RegularUser/signout') ?>';" style="width:250px;">Sign Out</button>
@@ -28,7 +28,7 @@
 <div class="row" style="margin-top:75px;">
 <div  class="col-4 ">
 
-<button class=" fill" onclick="window.location.href = 'game.html';">Play</button>
+<button class=" fill" onclick="window.location.href = '<?php echo site_url('RegularUser/play') ?>';">Play</button>
 
 
 <button class=" fill"onclick="window.location.href = '<?php echo site_url('RegularUser/statistics') ?>';">Statistics</button>
@@ -48,24 +48,24 @@
 </div>
 <div id="demo2" class="centar"  <?php if($str == 3) echo "style='display:block'"; else echo "style='display:none'";?>>
 <div  class="vertical-menu">
-    <?php 
-    foreach($partije as $partija){
-        $str="";
-        $str.= "<div class='row'>";
-        $str.= "<div class='col-4'>";
-      
-        $str.= "<p class=".$partija->pobedio.">";
-        if($partija->pobedio =="win"){
-             $str.= "WIN";
-        }
-        else  $str.= "LOSS";
-        $str.= "</p></div>";
-        $str.=  "<div class= 'col-8'>";
-        $str.= "<p class=".$partija->pobedio.">";
-        $str.="Points: ".$partija->partija->BrojPoena."p</p></div></div>";
-        echo $str;
-    }
-    ?>
+     <?php
+                            foreach ($partije as $partija) {
+                                $str = "";
+                                $str .= "<div class='row'>";
+                                $str .= "<div class='col-4'>";
+
+                                $str .= "<p class=" . $partija->Ishod . ">";
+                                $str.= strtoupper($partija->Ishod);
+                                $str .= "</p></div>";
+                                $str .= "<div class= 'col-4'>";
+                                $str .= "<p class=" . $partija->Ishod . ">";
+                                $str .= "Points: " . $partija->BrojPoena . "p</p></div>";
+                                $str .= "<div class= 'col-4'>";
+                                $str .= "<p class=" . $partija->Ishod . ">";
+                                $str .= "Date: " . $partija->Datum . "</p></div></div>";
+                                echo $str;
+                            }
+                            ?>
 </div>
 </div>
 
@@ -77,8 +77,9 @@
          $str="";
          $str.="<div class='red'><div class='spot'>";
          $str.=$i."</div><div class='name'>";
-         $str.=$igrac->Username."</div><div class='score'>".$igrac->Poeni."</div></div></div>";
+         $str.=$igrac->Username."</div><div class='score'>".$igrac->Poeni."</div></div>";
          echo $str;
+         $i++;
      }
     ?>
    

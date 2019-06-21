@@ -24,9 +24,8 @@
 
 <div class="row">
 <div class="col-8">
-<p class="quote" ><i>"One ring to rule them all."</i></p>
+<p class="quote" >One ring to rule them all.</p>
 
-<p class="quote"><font size:20px color:>Author</font></p>
 </div>
 <div class="col-4">
 <button class="signout" class="col-4" onclick="window.location.href = '<?php echo site_url('AdminC/signout') ?>';" style="width:250px;">Sign Out</button>

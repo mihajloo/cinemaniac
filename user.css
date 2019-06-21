@@ -89,6 +89,9 @@ cursor:default;
 .draw{
  background-color: #FFDF00;
 }
+.left{
+ background-color:#707070;
+}
 .vertical-menu p {
   
   color: black;

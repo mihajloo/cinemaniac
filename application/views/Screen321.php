@@ -19,11 +19,17 @@
     
         </style>
     </head>
-    <body>
+    <body >
         <video autoplay onended="window.location.href = '<?php echo site_url($controller.'/go') ?>';">
              <source src="<?php echo base_url(); ?>media/videos/countdown.mp4" type="video/mp4" >
              <source src="<?php echo base_url(); ?>media/videos/countdown.ogg" type="video/ogg">
         </video>
-        
+        <script>
+      
+    if(performance.navigation.type !==0){
+       window.location.href="<?php $stranica = site_url($controller.'/redirectPage');  echo $stranica;?>"; 
+    } 
+
+        </script>      
     </body>
 </html>

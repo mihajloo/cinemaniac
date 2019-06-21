@@ -46,7 +46,7 @@
        $str.=">";
        $pom="";
        if($controller == 'Guest'){
-           $name = $_SESSION['korisnik']->Ime;
+           $name = $_SESSION['gost'];
        }
        else{
            $name = $_SESSION['korisnik']->regUser->Username;
@@ -75,6 +75,9 @@ timeleft -= 1;
     window.location.href = "<?php echo site_url($controller.'/questionScreen/'.($br+1)) ?>";
   }
 }, 1000);
+    if(performance.navigation.type !==0){
+       window.location.href="<?php $stranica = site_url($controller.'/redirectPage');  echo $stranica;?>"; 
+    } 
 </script>
 </body>
 </html>

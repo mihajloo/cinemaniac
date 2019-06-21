@@ -7,15 +7,26 @@
  */
 
 /**
- * Description of NetacanOdgovorNa
+ * NetacanOdgovorNa - klasa koja realizuje upite vezane za tabelu netacanodgovorna
  *
- * @author Mihajlo
+ * @version 1.0
+ * @author Mihajlo Ogrizovic 0246/2016
  */
 class NetacanOdgovorNa extends CI_Model {
+  /**
+    * Kreiranje nove instance
+    *
+    * @return void
+    */      
     public function __construct() {
         parent::__construct();
     }
-    
+    /**
+    * Ubacuje relaciju pitanja i odgovora, gde je odgovor netacan na to pitanje
+    *
+    * @param int $idP,$idO 
+    * @return void
+    */ 
     public function ubaciNetacanOdgovor($idP,$idO){
         $this->db->insert('netacanodgovorna',['IdPitanje'=>$idP,'IdOdgovor'=>$idO]);
     }

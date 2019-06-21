@@ -96,8 +96,8 @@ $('#deleteModal').on('show.bs.modal', function(e) {
 </script>      
 <div class="row">
 <div class="col-8">
-<p class="quote" ><i>"Reality can be whatever I want."</i></p>
-<p class="quote"><font size:20px color:>Author</font></p>
+<p class="quote" >Reality can be whatever I want.</p>
+
 
 </div>
 <div class="col-4">
@@ -190,7 +190,7 @@ $('#deleteModal').on('show.bs.modal', function(e) {
                 <font  color=#FFDF00 >Q:</font> 
 	</div>	
 	<div class="col-11">
-            <input type="text" name="Question" placeholder="Enter your question" maxlength="45" value="<?php if(isset($question)) echo $question ?>"><br>
+            <input type="text" name="Question" placeholder="Enter your question" value="<?php if(isset($question)) echo $question ?>"><br>
             
         </div>	
 	</div>
@@ -199,7 +199,7 @@ $('#deleteModal').on('show.bs.modal', function(e) {
 		<font  color=#FFDF00 >C.A:</font> 
 	</div>	
 	<div class="col-11">	
-		<input type="text" id='CA' name="CA" placeholder="Enter your correct answer" maxlength="45" value="<?php if(isset($corAns)) echo $corAns ?>"><br>
+		<input type="text" id='CA' name="CA" placeholder="Enter your correct answer"  value="<?php if(isset($corAns)) echo $corAns ?>"><br>
 	</div>
 	</div>
 	<div class="row">
@@ -207,8 +207,8 @@ $('#deleteModal').on('show.bs.modal', function(e) {
 		<font  color=#FFDF00 >W.A:</font> 
 	</div>	
 	<div class="col-11">	
-		<input type="text" name="WA1" placeholder="Enter your wrong answer" maxlength="45" value="<?php  if(isset($wrAns[0])) echo $wrAns[0]->Tekst ?>"><br>
-                <input type="hidden" name="WA1id" placeholder="Enter your wrong answer" maxlength="45" value="<?php  if(isset($wrAns[0])) echo $wrAns[0]->IdOdgovor ?>">
+		<input type="text" name="WA1" placeholder="Enter your wrong answer"value="<?php  if(isset($wrAns[0])) echo $wrAns[0]->Tekst ?>"><br>
+                <input type="hidden" name="WA1id" placeholder="Enter your wrong answer" value="<?php  if(isset($wrAns[0])) echo $wrAns[0]->IdOdgovor ?>">
         </div>
 
 	</div>
@@ -217,8 +217,8 @@ $('#deleteModal').on('show.bs.modal', function(e) {
 		<font  color=#FFDF00 >W.A:</font> 
 	</div>	
 	<div class="col-11">	
-		<input type="text" name="WA2" placeholder="Enter your wrong answer" maxlength="45" value="<?php if(isset($wrAns[1])) echo $wrAns[1]->Tekst ?>"><br>
-                <input type="hidden" name="WA2id" placeholder="Enter your wrong answer" maxlength="45" value="<?php  if(isset($wrAns[1])) echo $wrAns[1]->IdOdgovor ?>">
+		<input type="text" name="WA2" placeholder="Enter your wrong answer"  value="<?php if(isset($wrAns[1])) echo $wrAns[1]->Tekst ?>"><br>
+                <input type="hidden" name="WA2id" placeholder="Enter your wrong answer"  value="<?php  if(isset($wrAns[1])) echo $wrAns[1]->IdOdgovor ?>">
         </div>
 	</div>
 	<div class="row">	
@@ -226,11 +226,11 @@ $('#deleteModal').on('show.bs.modal', function(e) {
 		<font  color=#FFDF00 >W.A:</font> 
 		</div>	
 	<div class="col-11">	
-		<input type="text" name="WA3" placeholder="Enter your wrong answer" maxlength="45" value="<?php if(isset($wrAns[2])) echo $wrAns[2]->Tekst ?>"><br>
-                <input type="hidden" name="WA3id" placeholder="Enter your wrong answer" maxlength="45" value="<?php  if(isset($wrAns[2])) echo $wrAns[2]->IdOdgovor ?>">
+		<input type="text" name="WA3" placeholder="Enter your wrong answer" value="<?php if(isset($wrAns[2])) echo $wrAns[2]->Tekst ?>"><br>
+                <input type="hidden" name="WA3id" placeholder="Enter your wrong answer"  value="<?php  if(isset($wrAns[2])) echo $wrAns[2]->IdOdgovor ?>">
         </div>
 	</div>
-            <input type="hidden" name="idq" placeholder="Enter your wrong answer" maxlength="45" value="<?php if(isset($idQ)) echo $idQ; ?>">
+            <input type="hidden" name="idq" placeholder="Enter your wrong answer" value="<?php if(isset($idQ)) echo $idQ; ?>">
 	</form>
                 <button <?php if(isset($accept)){if($accept==1) echo "class='fill'"; else echo "class='submit'";}?> data-toggle="modal" data-target="#acceptModal" ><?php if(isset($accept)){if($accept==1) echo 'Accept'; else echo 'Edit';}?></button>
                 <button <?php if(isset($accept)){if($accept==1) echo "class='losefill'"; else echo "class='submit'";}?>  data-toggle="modal" data-target="#deleteModal" ><?php if(isset($accept)){if($accept==1) echo 'Reject'; else echo 'Delete';}?></button>

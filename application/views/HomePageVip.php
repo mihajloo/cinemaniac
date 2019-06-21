@@ -24,7 +24,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-8">
-                    <p class="quote" ><i>Because they're exclusive. And fun, and they lead to a better life.</i></p>
+                    <p class="quote" >Because they're exclusive. And fun, and they lead to a better life.</p>
                 </div>
                 <div class="col-4">
                     <button class="signout" class="col-4" onclick="window.location.href = '<?php echo site_url('VipC/signout') ?>';" style="width:250px;">Sign Out</button>

@@ -87,7 +87,11 @@ body, html {
 
 
 
-
+    <script>
+        if(performance.navigation.type !==0){
+       window.location.href="<?php $stranica = site_url($controller.'/redirectPage');  echo $stranica;?>"; 
+    } 
+    </script>
 
 </body>
 </html>

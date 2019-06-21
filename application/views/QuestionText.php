@@ -103,6 +103,11 @@ timeleft -= 1;
   }
 
 }, 1000);
+
+    if(performance.navigation.type !==0){
+       window.location.href="<?php $stranica = site_url($controller.'/redirectPage');  echo $stranica;?>"; 
+    } 
+
 </script>
 </body>
 </html>

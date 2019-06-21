@@ -7,18 +7,36 @@
  */
 
 /**
- * Description of BiloU
+ * BiloU - klasa koja realizuje upite vezane za tabelu bilou
  *
- * @author Mihajlo
+ * @version 1.0
+ * @author Mihajlo Ogrizovic 0246/2016
  */
 class BiloU extends CI_Model{
+    
+  /**
+    * Kreiranje nove instance
+    *
+    * @return void
+    */    
     public function __construct() {
         parent::__construct();
     }
-    
+  /**
+    * Ubacuje id pitanja za navedeni id partije
+    *
+    *@param int $idPartija,$idPitanje 
+    * @return void
+    */     
     public function pitanjeZaPartiju($idPartija,$idPitanje){
         $this->db->insert('bilou',['IdPartija'=>$idPartija,'IdPitanje'=>$idPitanje]);
     }
+  /**
+    * Dohvata sva pitanja za trazenu partiju
+    *
+    *@param int $idPartija 
+    * @return stdClass[]
+    */    
     public function dohvatiPitanjaZaPartiju($idPartija){
         $this->db->select('p.IdPitanje AS IdPitanje,p.Tekst AS Tekst, s.Naziv AS Naziv');
         $this->db->from('bilou b,pitanje p,scena s');

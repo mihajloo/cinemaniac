@@ -7,21 +7,22 @@
  */
 
 /**
- * Description of AdminC
+ * AdminC - klasa koja realizuje funkcionalnosti vezane za Administratora
  *
- * @author asus
+ * @version 1.0
+ * @author Nikola Vucenovic 0363/2016, Filip Jankovic 0343/2016
  */
 class AdminC extends CI_Controller {
-    
+     /**
+    * Kreiranje nove instance
+    *
+    * @return void
+    */     
     
     public function __construct() {
         parent::__construct();
         
-        $this->load->model('Korisnik');
-        $this->load->model('Admin');
-        $this->load->model('Moderator');
-        $this->load->model('Igrac');
-        $this->load->model('Vip');
+
         
         $korisnik = $this->session->userdata('korisnik');
         if($korisnik == null) {
@@ -40,18 +41,37 @@ class AdminC extends CI_Controller {
             redirect('VipC');
         }
     }
-    
+   /**
+    * Sluzi za prikaz stranice
+    *
+    * @param String $page,stdClass[] $content 
+    * @return void
+    */ 
     private function prikazi($page, $content = []) {
         $this->load->view($page, $content);
     }
-    
+     /**
+    * Ucitava pocetnu stranicu
+    *
+    * @return void
+    */     
     public function index() {
         $this->searchUser();
     }
+     /**
+    * Zatvara sesiju trenutnog korisnika
+    *
+    * @return void
+    */    
      public function signout(){
         $this->session->unset_userdata('korisnik');
         redirect("Guest");
     }
+   /**
+    * Brise moderatora iz baze
+    *
+    * @return void
+    */ 
     public function deleteModerator(){
          $this->form_validation->set_rules('user_id', 'user_id', 'required');
         if($this->form_validation->run()){
@@ -61,6 +81,11 @@ class AdminC extends CI_Controller {
         }
        
     }
+   /**
+    * Ubacuje moderatora u bazu
+    *
+    * @return void
+    */     
      public function insertModerator(){
         $this->form_validation->set_rules('user_id', 'user_id', 'required');
         if($this->form_validation->run()){
@@ -70,7 +95,11 @@ class AdminC extends CI_Controller {
         }
         
     }
-    
+   /**
+    * Brise Vipa iz baze
+    *
+    * @return void
+    */   
         public function deleteVIP(){
          $this->form_validation->set_rules('user_id', 'user_id', 'required');
         if($this->form_validation->run()){
@@ -80,6 +109,11 @@ class AdminC extends CI_Controller {
         }
        
     }
+       /**
+    * Ubacuje Vipa u bazu
+    *
+    * @return void
+    */   
      public function insertVIP(){
         $this->form_validation->set_rules('user_id', 'user_id', 'required');
         if($this->form_validation->run()){
@@ -89,15 +123,13 @@ class AdminC extends CI_Controller {
         }
         
     }
+         /**
+    * Sluzi za prikaz svih korisnika
+    *
+    * @return void
+    */   
     public function searchUser(){
-          $this->form_validation->set_rules('srchUser', 'srchUser','required');
-          $forma=$this->form_validation->run();
-          if($forma) {
-              $kljuc=$this->input->post('srchUser');
-           $users=$this->Korisnik->searchUserByKey($key);
-           }
-          
-          else $users=$this->Korisnik->dohvatiSveKorisnike();
+           $users=$this->Korisnik->dohvatiSveKorisnike();
           foreach($users as $kor){
           if($this->Moderator->proveriModeratora($kor->Username)){
               $kor->isModerator=true;
@@ -114,6 +146,11 @@ class AdminC extends CI_Controller {
           $this->prikazi('HomePageAdmin.php',$poruka);
          
     }
+        /**
+    * Ubacuje korisnika iz baze
+    *
+    * @return void
+    */     
     public function deleteUser(){
         $this->form_validation->set_rules('user_id', 'user_id', 'required');
         if($this->form_validation->run()){

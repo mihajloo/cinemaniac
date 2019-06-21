@@ -63,7 +63,13 @@
        }        
        $str.=">";
        $pom="";
-       if($result->Username == $_SESSION['korisnik']->regUser->Username){
+       if($controller == 'Guest'){
+           $name = $_SESSION['gost'];
+       }
+       else{
+           $name = $_SESSION['korisnik']->regUser->Username;
+       }
+       if($result->Username == $name){
            $pom="class='user'";
        }
        $str.="<div class='col-2 offset-1'><div ".$pom.">".$i.".</div></div>";
@@ -90,6 +96,6 @@
 </div>	
 </div>	
 </div>	
-
+      
 </body>
 </html>
